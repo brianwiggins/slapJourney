@@ -1,0 +1,16 @@
+
+.begin{
+font-family:"Rubik";
+}
+.name-screen{
+  background-image: url(https://media.giphy.com/media/3ov9k1173PdfJWRsoE/giphy.gif);
+  
+  height:100vh;
+  padding:0;
+  margin:0;
+  font-family:"Ubuntu";
+}
+.transparent{
+  background-color:none;
+  outline:none;
+}
