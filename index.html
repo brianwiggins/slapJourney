@@ -19,18 +19,34 @@
       </div>
     </div>
       <div class="row justify-content-center align-items-center">
-        <div class="col-xs-4" style="width:33vw" id="adspace"></div>
-      <div class="col-xs-4">
-        <input class="form-control form-control-lg rounded" style="height:20vh; width:70vw; margin-left:15vw; margin-top:20vh; color:black;font-size:24px;" type="text" placeholder="Your name">
+      <div class="col-xs-12">
+        <input class="form-control form-control-lg rounded" style="height:20vh; width:70vw; margin-left:15vw; margin-top:20vh; color:black;font-size:24px;" type="text" id="name-input" placeholder="Hero">
       </div>
-      <div class="col-xs-4" style="width:33vw" id="adspace"></div></div>
+      <div class="col-xs-12">
+        <button class="btn btn-block btn-primary" style="height:15vh;width:70vw;margin-left:15vw;margin-top:5vh;" onclick="loadScreenSwitch(); makeUserHero()">Begin Your Journey</button>
+      </div>
+      </div>
     </div>
-      <div class="col-12"></div>
-    \
+      
   </div>
   
   <div class="container.fluid begin" id="fight-screen" style="display:none;">
-    
+    <!--Name, description, picture, and text box-->
+    <div class="row">
+      <div class="col-12" style="display:flex; justify-content:space-between">
+        <p id="oppenent-name"></p><p id="opponent-description"></p>
+      </div>
+      <div class="col-6" id="hero-pic"><img id="imgFile" style="width:50vw; height:25vh"></div>
+      <div class="col-6" style></div>
+      <div class="col-12" id="hud">
+        <div class="row" id="opponent-hp">
+          <div class="col-xs-6" id="opponent-hp"></div>
+          <div class="col-12" id="user-hp"></div>
+          <div class="col-6"></div>
+        </div>
+        <div class="row"></div>
+      </div>
+    </div>
     
   </div>
   <script src="app.js"></script>

@@ -1,191 +1,124 @@
-//heroes
-function setName(userName){
-  heroList.userHero.heroName=userName;
-  return userName;
+//hero constructor
+class Hero{
+  constructor(name,description,imgFile,health,modifier){
+    this.name=name;
+    this.description=description;
+    this.imgFile=imgFile;
+    this.health=health;
+    this.modifier=modifier;
   }
-let heroList={
-userHero:{
-health:100,
-heroName:(setName),
-hits:0,
-emojis:[],
-allies:[],
-moves:[],
-equippedAlly:(equipAlly),
-equippedEmoji:(equipEmoji),
-  },
-patrick:
-{
-name: "Patrick Star",
-imgFile:"patrick0.jpeg",
-health:50,
-heroName:"Patrick",
-description:"Never won an award",
-hits:0,
-},
-
-mongoose:
-  {
-    name:"Mongoose",
-    imgFile:"mongoose.jpeg",
-    description:"Mongooses are good boys too",
-    health:100,
-    hits:0,
-    modifier:20
-
-  },
+  getHealth(){
+    return this.health;
+  }
+  getName(){
+    return this.name;
+  }
+  getDescription(){
+    return this.description;
+  }
+  getimgFile(){
+    return this.imgFile;
+  }
+  getModifier(){
+    return this.modifier;
+  }
   
-  fishFrog:
-  {
-    name:"Frog on a Fish",
-    imgFile:"fishFrog.jpeg",
-    description:"WTF? He do be gettin a ride, doe",
-    health:125,
-    hits:0,
-    modifier:50
-  },
-
-  babyYoda:
-  {
-    imgFile:"babyyoday.jpeg",
-    name:"Baby Yoda",
-    description:"He speaks with his eyes",
-    health:300,
-    hits:0,
-    modifier:300
-  },
-  bigNibba:{
-    name:"Big Ni🅱️🅱️a",
-    imgFile:"bignibba.jpeg",
-    description:"His weapon is useless now, but he is still pretty big",
-    health:500,
-    hits:0,
-    modifier:250
-  },
-  harambe:{
-    name:"Harambe",
-    imgFile:"harambe.jpeg",
-    description:"He has died before and he is willing to die again",
-    health:1000,
-    hits:0,
-    modifier:500
-  },
-  shaggy:{
-    name:"Shaggy",
-    imgFile:"shaggy.jpeg",
-    description:"Champion of Earth",
-    health:10000,
-    hits:0
-  },
-  bigChungus:{
-    name:"Big Chungus",
-    imgFile:"bigchung.jpeg",
-    description:"Destroyer of Worlds",
-    health:20000,
-    hits:0,
-  }
-
-
+}
+//make a new user
+let userHero = new Hero;
+function makeUserHero(){
+ let name = document.getElementById("name-input").innerHTML;
+ let description = "A hero on a Journey";
+ let imgFile = "None";
+ let health = 100;//initial health
+ let modifier=0;//initial modifier
+ let hero = new Hero(name,description,imgFile,health,modifier);
+ userHero = hero;
 }
 
-//gain new things
-function giveEmoji(emoji){
-heroList.userHero.emojis.push(emoji);
-}
-function gainHealth(){
-  heroList.userHero.health+=150;
-}
-function gainAlly(ally){
-  heroList.userHero.allies.push(ally);
-}
-//equip new things
-function equipAlly(ally){
-heroList.userHero.equippedAlly=ally;
-return ally;
-}
-function equipEmoji(emoji){
-  heroList.userHero.equippedAlly=emoji;
-  return emoji;
-}
+//the list of fightable heroes
+//the array
+let heroList = [
+//each individual hero
+new Hero("Patrick Star","He has never won an award","patrick0.jpeg",10,0),
 
-//damage items
-let emojis={
-  sunglasses:
-  {
-  image:"😎",
-  name:"Sunglasses Emoji",
-  modifier:10,
-  description:"Look much cooler"},
+new Hero("Mongoose", "Mongooses are good boys too","mongoose.jpeg",20,5),
 
-  monkey:
-  {
-    image:"🙈",
-    name:"See No Evil Emoji", 
-    modifier:30,
-    description:"Appear Innocent"
-  },
+new Hero("Frog on a fish","WTF? He do be catching a ride, doe","fishfrog.jpeg",30,10),
 
-  laughing:
-  {
-    image:"😂",
-    name:"Laughing Emoji",
-    modifier:50,
-    description:"Make anything funny"
-  },
+new Hero("Baby Yoda", "He is not edible", "babyyoday.jpeg",50,50),
 
-  okay:
-  {
-    image:"👌",
-    name:"OK Hand Emoji",
-    modifier:100,
-    description:"Make your opponent lose the game"
-  }
-}
+new Hero("Big Ni🅱️🅱️a", "He seems pretty cool","bignibba.jpeg",100,50),
 
-//Moves
-function slap(hero){
-  hero.health-=1;
-  update();
-  hero.hits++;
-}
-function punch(hero){
-  hero.health-=5;
-  update();
-  hero.hits++;
-}
-function kick(hero){
-  hero.health-=10;
-  update();
-  hero.hits++;
-}
-function bite(hero){
-  hero.health
-}
+new Hero("Harambe", "He has died before and he is not afraid to die again","harambe.jpeg",500,100),
 
-//hero update
+new Hero("Shaggy", "Champion of Earth","shaggy.jpeg",1000,0)
 
-function update(hero){
+];
 
-  let healthPoints = heroList[hero].health.toString();//standard hp
-
-  if(heroList[hero].health<=0&&heroList[hero].hasOwnProperty('modifier')){
-    healthPoints="None. The hero is defeated.";
-    heroList.userHero.allies.push(heroList[hero])//hero can be added to ally list
-  }
-    else{
-    healthPoints="None. The hero is dead.";
-    //hero cannot be added to ally list
-  }
-  document.getElementById("health").innerText=healthPoints;
-
-  document.getElementById("hits").innerText=heroList[hero].hits.toString();
-  document.getElementById("heroName").innerText=heroList[hero].name;
-}
-
-//html functions
-
+//switch from load to game screen
 function loadScreenSwitch(){
   document.getElementById("load-screen").style.display="none";
   document.getElementById("fight-screen").style.display="block";
 }
+
+//fight sequence
+let heroNumber = 0;//this number increases with each boss defeated
+function fightSequence(heroNumber){
+  let yourTurn = true;
+  //pass in which level hero you are on (ex: patrick is level 0)
+  let tempUserHealth=userHero.getHealth();
+  let tempOpponentHealth=heroList[heroNumber].getHealth();
+while(tempUserHealth>0&&tempOpponentHealth>=0){
+if(yourTurn){
+document.getElementById("your-turn").style.display="block";
+
+//call damageCalculator
+//deal damage
+  yourTurn=false;
+}
+else{
+
+  yourTurn=true;
+}
+
+
+}
+}
+//figure out countdown
+function countdown(time){
+setTimeout(countdown,1000)
+time--;
+return time;
+}
+function doMove(move){
+  let damage=0;
+  switch(move){
+    
+    case "punch":
+      damage+=3;
+      break;
+    
+    case "kick":
+      damage+=5;
+      break;
+    
+    case "eye-poke":
+      damage+=7;
+      break;
+
+  }
+}
+
+
+
+for(let i=0;i<heroList.length;i++){
+
+}
+
+
+
+
+
+    
 

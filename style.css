@@ -1,4 +1,6 @@
-
+*{
+  outline:solid black 1px;
+}
 .begin{
 font-family:"Rubik";
 }
